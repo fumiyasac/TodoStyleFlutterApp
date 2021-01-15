@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:todo_sample_app_with_provider/models/task_data.dart';
 
 class AddTaskScreen extends StatelessWidget {
-  final Function addTaskCallback;
-
-  AddTaskScreen(this.addTaskCallback);
 
   @override
   Widget build(BuildContext context) {
@@ -39,8 +38,9 @@ class AddTaskScreen extends StatelessWidget {
                 child: Text('追加する', style: TextStyle(color: Colors.white)),
                 color: Colors.lightBlueAccent,
                 onPressed: () {
-                    addTaskCallback(newTaskTitle);
-                    Navigator.pop(context);
+                  // MEMO: 値が更新された通知を伝える「notifyListeners();」をTaskDataクラスに定義する
+                  Provider.of<TaskData>(context).addTask(newTaskTitle);
+                  Navigator.pop(context);
                 })
           ],
         ),

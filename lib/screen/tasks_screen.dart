@@ -20,14 +20,7 @@ class TasksScreen extends StatelessWidget {
                 child: Container(
                   padding: EdgeInsets.only(
                       bottom: MediaQuery.of(context).viewInsets.bottom),
-                  child: AddTaskScreen((newTaskTitle) {
-
-                    // TODO: 後でProviderを利用して書き直す部分
-                    // setState(() {
-                    //   tasks.add(Task(name: newTaskTitle));
-                    // });
-
-                  }),
+                  child: AddTaskScreen(),
                 ),
               ));
         },
