@@ -17,14 +17,19 @@ class TasksList extends StatelessWidget {
       builder: (context, taskData, child) {
         return ListView.builder(
           itemBuilder: (context, index) {
-            // MEMO: Providerを経由してStateの変化をキャッチする(StatelessWidgetでも状態変化をキャッチ可能になる)
-            // おおもとにあるWidget(MyApp)がChangeNotifierProviderの対象となっているのでその中に含まれているものは監視対象となる点がポイント
+            final task = taskData.tasks[index];
             return TaskTile(
-                taskTitle: taskData.tasks[index].name,
-                isChecked: taskData.tasks[index].isDone,
-                checkboxCallback: (checkboxState) {
-                  // TODO: 後でProviderを利用して書き直す部分
-                });
+                taskTitle: task.name,
+                isChecked: task.isDone,
+                checkboxCallback: (_) {
+                  // MEMO: 表示対象のTaskモデルのオブジェクトの状態を変更し、その後ListViewを再度表示する
+                  taskData.updateTask(task);
+                },
+                longPressCallback: () {
+                  // MEMO: 表示対象のTaskモデルを削除し、その後ListViewを再度表示する
+                  taskData.deleteTask(task);
+                },
+            );
           },
           itemCount: taskData.taskCount,
         );
