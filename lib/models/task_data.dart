@@ -7,4 +7,8 @@ class TaskData extends ChangeNotifier {
     Task(name: '燃えるゴミを出す'),
     Task(name: '猫砂を交換する＆トイレの掃除'),
   ];
+
+  int get taskCount {
+    return tasks.length;
+  }
 }
